@@ -94,9 +94,6 @@ public class CssSelectors {
         driver.quit();
     }
 
-
-
-
     public void pause(int time) {
         try {
             Thread.sleep(time);
