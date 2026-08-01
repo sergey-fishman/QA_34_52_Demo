@@ -125,8 +125,8 @@ WebElement btnSubmitReg = driver.findElement(By.cssSelector
         ("div.login_login__3EHKB form button:nth-of-type(2)"));
 // first-of-type
 ```
-![a href about](assets/ahrefabout.png)
-![div id root](assets/div_id_root.png)
+![a href about](../assets/ahrefabout.png)
+![div id root](../assets/div_id_root.png)
 ### 7. Find new WebElement by ID
 ```java
 WebElement divRoot1 =
@@ -151,4 +151,4 @@ public void hideFooter(){
         js.executeScript("document.querySelector('footer').style.display = 'none'");
     }
 ```
-![js query selector footer display none](assets/querySelectorFooterDisplayNone.png)
+![js query selector footer display none](../assets/querySelectorFooterDisplayNone.png)
