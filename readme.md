@@ -87,7 +87,7 @@ WebElement divRoot =
 
 WebElement linkSearch =
                 driver.findElement(By.cssSelector(".navigation-link"));
-// поиск по классам, найдет первый попавшийся
+// точки для поиска по классам, найдет первый попавшийся
 // a[class='navigation-link']
 // .navigation-link
 // *[class='navigation-link']
@@ -108,6 +108,11 @@ WebElement linkSignUp = driver.findElement(By.cssSelector
                 ("div.header a.navigation-link:nth-child(5)"));
 // a:first-child
 // a:last-child
+
+// button submit Registration via button:nth-of-type
+WebElement btnSubmitReg = driver.findElement(By.cssSelector
+        ("div.login_login__3EHKB form button:nth-of-type(2)"));
+// first-of-type
 ```
 ![a href about](assets/ahrefabout.png)
 ![div id root](assets/div_id_root.png)
