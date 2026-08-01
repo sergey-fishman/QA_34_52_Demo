@@ -57,22 +57,33 @@ public void scrollActions(){
     }
 ```
 ## Main commands
-1. Maximize browser window
+### 1. `pageLoadTimeout()`
+* За что отвечает: Ограничивает время, которое браузер может потратить на открытие ссылки при вызове команд `driver.get()` или `driver.navigate().to()`.
+* Как работает: Если страница полностью загрузилась (сработал триггер `document.readyState === 'complete'`) за 4 секунды, код сразу пойдет дальше. Если страница грузится слишком долго и 10 секунд истекли, Selenium прервет операцию и выбросит исключение `TimeoutException`.
+* Зачем нужен: Чтобы тесты не зависали бесконечно на «битых» или крайне медленных страницах.
+
+### 2. `implicitlyWait()`
+- **За что отвечает**: Задает запас времени на поиск элементов через `driver.findElement()` или `driver.findElements()`.
+- **Как работает**: Если элемент присутствует в DOM-дереве сразу, Selenium взаимодействует с ним мгновенно (ожидания нет). Если элемента нет, драйвер не выдает ошибку сразу, а начинает регулярно опрашивать (делать запросы к DOM) страницу в течение указанных 10 секунд. Если за 10 секунд элемент так и не появился, выбрасывается исключение `NoSuchElementException`.
+- **Зачем нужен**: Помогает обрабатывать динамический контент (например, когда элементы подгружаются через AJAX не сразу). Конфигурация применяется один раз и действует на протяжении всего сокет-соединения (сессии) для каждого последующего поиска элемента.
+
+
+### 3. Maximize browser window
 ```java 
 driver.manage().window().maximize();
 ```
-2. Get link
+### 4. Get link
 ````java
 driver.get("URL")
 ````
-3. Navigate within a website
+### 5. Navigation
 ```java
 driver.navigate().to("https://telranedu.web.app/home");
 driver.navigate().back();
 driver.navigate().forward();
 driver.navigate().refresh();
 ```
-4. Find new WebElement by the CssSelector
+### 6. Find new WebElement by the CssSelector
 ```java
 WebElement btnAbout =
                 driver.findElement(By.cssSelector("a[href='/about']"));
@@ -116,24 +127,24 @@ WebElement btnSubmitReg = driver.findElement(By.cssSelector
 ```
 ![a href about](assets/ahrefabout.png)
 ![div id root](assets/div_id_root.png)
-5. Find new WebElement by ID
+### 7. Find new WebElement by ID
 ```java
 WebElement divRoot1 =
                 driver.findElement(By.id("root"));
 ```
-6. Find new WebElement by Name
+### 8. Find new WebElement by Name
 ```java
 WebElement divRoot2 =
                 driver.findElement(By.className("container"));
 ```
-7. Find new WebElement by Text
+### 9. Find new WebElement by Text
 ```java
 WebElement linkLetTheCar = 
                 driver.findElement(By.linkText("Let the car work"));
 WebElement linkLetTheCar1 = 
                 driver.findElement(By.partialLinkText("work"));
 ```
-8. JavaScript Executor. Hide `footer`
+### 10. JavaScript Executor. Hide footer
 ```java
 public void hideFooter(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
