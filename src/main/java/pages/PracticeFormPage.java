@@ -33,6 +33,14 @@ public class PracticeFormPage extends BasePage{
     WebElement textAreaCurrentAddress;
     @FindBy(id = "subjectsInput")
     WebElement inputSubjects;
+    @FindBy(xpath = "//div[@id='state']//input")
+    WebElement inputState;
+    @FindBy(id = "react-select-4-input")
+    WebElement inputCity;
+    @FindBy(id = "submit")
+    WebElement btnSubmit;
+    @FindBy(id = "example-modal-sizes-title-lg")
+    WebElement modalMessage;
 
     public void typePracticeForm(Student student){
         inputFirstName.sendKeys(student.getFirstName());
@@ -43,9 +51,19 @@ public class PracticeFormPage extends BasePage{
 //        inputDateOfBirth.click();
 //        inputDateOfBirth.sendKeys(student.getDateOfBirth());
         typeDateOfBirth(student.getDateOfBirth());
-        textAreaCurrentAddress.sendKeys(student.getAddress());
-        typeSubjects(student.getSubjects());
         chooseHobbies(student.getHobbies());
+        textAreaCurrentAddress.sendKeys(student.getAddress());
+        typeStateCity(student.getState(),student.getCity());
+        typeSubjects(student.getSubjects());
+        btnSubmit.click();
+    }
+
+    private void typeStateCity(String state, String city) {
+        inputState.sendKeys(state);
+        inputState.sendKeys(Keys.ENTER);
+
+        inputCity.sendKeys(city);
+        inputCity.sendKeys(Keys.ENTER);
     }
 
     private void chooseGender(Gender gender){
@@ -85,5 +103,9 @@ public class PracticeFormPage extends BasePage{
             inputSubjects.sendKeys(subject);
             inputSubjects.sendKeys(Keys.ENTER);
         }
+    }
+
+    public boolean validateModalMessage(String text) {
+        return isTestInElementPresent(modalMessage,text);
     }
 }
