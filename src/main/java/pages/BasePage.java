@@ -22,7 +22,7 @@ public abstract class BasePage {
         }
     }
 
-    public boolean isTestInElementPresent(WebElement element, String text) {
+    public boolean isTextInElementPresent(WebElement element, String text) {
         return element.getText().contains(text);
     }
 }

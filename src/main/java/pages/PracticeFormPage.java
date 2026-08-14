@@ -106,6 +106,6 @@ public class PracticeFormPage extends BasePage{
     }
 
     public boolean validateModalMessage(String text) {
-        return isTestInElementPresent(modalMessage,text);
+        return isTextInElementPresent(modalMessage,text);
     }
 }
