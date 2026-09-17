@@ -27,4 +27,7 @@ tasks.register('smoke', Test) {
     useTestNG(){
         suites 'src/test/resources/smoke.xml'
     }
+    if (project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
 }

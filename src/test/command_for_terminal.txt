@@ -1,1 +1,3 @@
 ./gradlew clean smoke
+./gradlew clean smoke -Pbrowser=firefox
+cd -> change directory in terminal

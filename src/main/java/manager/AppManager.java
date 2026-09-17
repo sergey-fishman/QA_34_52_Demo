@@ -3,7 +3,9 @@ package manager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.Browser;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -13,11 +15,19 @@ public class AppManager {
     public WebDriver getDriver() {
         return driver;
     }
+    static String browser =
+            System.getProperty("browser", Browser.CHROME.browserName());
 
     @BeforeMethod(alwaysRun = true)
     public void setup(){
-        ChromeOptions options = new ChromeOptions();
-        driver = new ChromeDriver();
+
+        driver = switch (browser) {
+            case String b when b.equals(Browser.CHROME.browserName()) -> new ChromeDriver();
+            case String b when b.equals(Browser.FIREFOX.browserName()) -> new FirefoxDriver();
+            case String b when b.equals(Browser.EDGE.browserName()) -> new EdgeDriver();
+            default -> throw new IllegalArgumentException("Unsupported browser: " + browser);
+        };
+
         driver.manage().window().setSize(new Dimension(1920,1080));
     }
 
